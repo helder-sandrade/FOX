@@ -192,7 +192,7 @@ function toColoseBuy_VBR(){
 	
 //Inicio do script que ficara rodando	
 
-for(i=0; i<500000; i++){
+for(i=0; i<5000000; i++){
 	ordem = false
 	ret = iimPlay("FOX/UltimaCotacaoBtc.iim"); //Script para monitorar o preço do bitcoin
 	price = iimGetExtract(0).replace('R$ ',''); //Registra a cotação atual do Bitcoin
@@ -236,7 +236,6 @@ for(i=0; i<500000; i++){
 				//Habilita novas vendas
 				enableSale = true
 				ordem = true
-				wrl("ordem compra		C: " +lastPurchaseValue)
 			}
 			if(ordem == false && enableSale) {
 				//Desativa novas vendas
@@ -253,7 +252,6 @@ for(i=0; i<500000; i++){
 						ret = iimPlay(comprar)
 				//Habilita novas compras
 				enablePurchase = true
-				wrl("ordem venda		V: " +nextSaleValue)
 			}
 		}
 	
