@@ -71,35 +71,22 @@ function setPercentBuy(lowerValue, highestValue, currentValue){
 	var lower 	= parseInt(lowerValue + (lowerValue* 0.004210526));//define menor valor 0,005% a cima do minimo
 	var highest = parseInt(highestValue - (highestValue* 0.006224));//define maior valor 0,008% a baixo do maximo
 	
-	
-	log = "";
-	log += "COTACAO: "+ currentValue +"\n";
-	log += "MAX: "+highestValue+	" - INIMAX: "	+highest+ "\n";
-	log += "MIN: "+lowerValue+	" - INIMIN: "	+lower+ "\n";
-	log += "----------SITUACAO--------"+"\n";
-	
-	
 	if(queue.length > (queueSize*0.5)){ //verifica se existe valores suficiente na fila para ser calculado
 		queuePermit = true; //permite que seja emitido ordens
 		if(currentValue >= highest){ //verifica se o valor corrente esta muito alto
-			log += "--- NAO COMPRAR ---"+"\n";
 			if(enableSale == false ) {
 				queuePermit = false;
 			}
 		} else {
 			if(currentValue <= lower) {//verifica se o valor corrente está bem baixo
-				log += "--- COMPRAR BAIXA ---"+"\n";
 				proportionPurchase = 0; //atribui 0% para a compra ou seja emite a compra com o valor atual
 				profitSale = 100;//joga o lucro desejado todo para a venda 
 		} else {
-				log += "--- COMPRAR NORMAL ---"+"\n";
 				proportionPurchase = 70; //emite uma ordem com 70% do valor do lucro a menos no valor corrente
 				profitSale = 40;//emite uma ordem com 40% do valor do lucro a cima do valor corrente
 			}
 		}
 	} 
-	log += "-------------------------"+"\n";
-	ret = iimDisplay(log+queue);
 }
 
 
@@ -240,6 +227,12 @@ for(i=0; i<500000; i++){
 						comprar = setRealValue_CBR(money)
 						comprar = toColoseBuy_CBR()
 						ret = iimPlay(comprar)
+							z = "";
+							z+= "cotacao:	" +price+ "\n";
+							z+= "compra:	" +lastPurchaseValue+ "\n";
+							z+= "venda:	" +nextSaleValue+ "\n";
+							z+= "-------------\n";
+							wrl(z)//gera log da compra
 				//Habilita novas vendas
 				enableSale = true
 				ordem = true
