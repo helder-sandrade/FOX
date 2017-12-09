@@ -9,8 +9,8 @@ var ordem = true
 var enableSale = false
 var enablePurchase = true
 
-var money = 5
-var profit = 200
+var money = 200
+var profit = 400
 var profitPurchase = 0.997553189010323 		
 var profitSale = 1.00104863328129 		
 var waitTime = 2
